@@ -1,0 +1,2 @@
+[workspace]
+members = ["factorial", "fibonacci", "check_if_array_is_sorted"]
