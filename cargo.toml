@@ -1,2 +1,7 @@
 [workspace]
-members = ["factorial", "fibonacci", "check_if_array_is_sorted"]
+members = [
+    "factorial",
+    "fibonacci",
+    "check_if_array_is_sorted",
+    "tiling_problem",
+]
