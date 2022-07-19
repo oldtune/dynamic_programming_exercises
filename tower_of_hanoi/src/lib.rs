@@ -1,3 +1,4 @@
+#[allow(dead_code, unused)]
 #[cfg(test)]
 mod tests {
     use crate::tower_of_hanoi::{tower_of_hanoi_solve, Plate, Rod};
@@ -36,7 +37,7 @@ mod tower_of_hanoi {
     }
 
     impl Display for Rod {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        fn fmt(&self, _: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             for plate in self.plates.iter().rev() {
                 println!("disk {}, {}", plate.name, plate.size);
             }
@@ -60,13 +61,12 @@ mod tower_of_hanoi {
         pub fn take_and_put_on_another_rod(&mut self, another_rod: &mut Rod) {
             match self.plates.pop_front() {
                 Some(plate) => another_rod.put(plate),
-                None => return,
+                None => (),
             }
         }
 
         pub fn plates(&self) -> impl Iterator<Item = &Plate> {
-            let iter = self.plates.iter();
-            iter
+            self.plates.iter()
         }
 
         pub fn new(name: &str, plates: Vec<Plate>) -> Self {
