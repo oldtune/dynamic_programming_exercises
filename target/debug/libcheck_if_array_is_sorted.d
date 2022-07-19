@@ -1,0 +1,1 @@
+C:\Users\do.tran.STS\Desktop\dynamic_programming_exercises\target\debug\libcheck_if_array_is_sorted.rlib: C:\Users\do.tran.STS\Desktop\dynamic_programming_exercises\check_if_array_is_sorted\src\lib.rs

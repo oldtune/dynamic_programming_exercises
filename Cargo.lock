@@ -17,3 +17,7 @@ version = "0.1.0"
 [[package]]
 name = "tiling_problem"
 version = "0.1.0"
+
+[[package]]
+name = "tower_of_hanoi"
+version = "0.1.0"
