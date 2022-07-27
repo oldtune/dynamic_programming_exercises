@@ -3,6 +3,14 @@
 version = 3
 
 [[package]]
+name = "backtracking_finding_subset"
+version = "0.1.0"
+
+[[package]]
+name = "backtracking_permutation"
+version = "0.1.0"
+
+[[package]]
 name = "check_if_array_is_sorted"
 version = "0.1.0"
 
@@ -12,6 +20,10 @@ version = "0.1.0"
 
 [[package]]
 name = "fibonacci"
+version = "0.1.0"
+
+[[package]]
+name = "subset_duo_number"
 version = "0.1.0"
 
 [[package]]

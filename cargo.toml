@@ -5,4 +5,7 @@ members = [
     "check_if_array_is_sorted",
     "tiling_problem",
     "tower_of_hanoi",
+    "backtracking_permutation",
+    "backtracking_finding_subset",
+    "subset_duo_number",
 ]

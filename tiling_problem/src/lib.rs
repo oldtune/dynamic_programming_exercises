@@ -21,7 +21,7 @@ mod tests {
 
     #[test]
     fn return_4_if_n_is_8() {
-        assert_eq!(4, tiling_problem_solve(8))
+        assert_eq!(7, tiling_problem_solve(8))
     }
 }
 
