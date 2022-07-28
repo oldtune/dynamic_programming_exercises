@@ -8,4 +8,5 @@ members = [
     "backtracking_permutation",
     "backtracking_finding_subset",
     "subset_duo_number",
+    "sudoku"
 ]

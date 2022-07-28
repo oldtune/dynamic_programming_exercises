@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 #[cfg(test)]
 mod tests {
     use crate::duo_number_solve;
@@ -13,6 +15,8 @@ pub fn duo_number_solve(index: u8, nums: &[u8], subset: Vec<u8>) {
     if index == nums.len() as u8 {
         return;
     }
+
+    // let mut hash_set = HashSet::new();
 
     if subset.len() < 2 || subset.contains(&nums[index as usize]) {
         let mut new_subset = subset.clone();

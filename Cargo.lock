@@ -27,6 +27,10 @@ name = "subset_duo_number"
 version = "0.1.0"
 
 [[package]]
+name = "sudoku"
+version = "0.1.0"
+
+[[package]]
 name = "tiling_problem"
 version = "0.1.0"
 
