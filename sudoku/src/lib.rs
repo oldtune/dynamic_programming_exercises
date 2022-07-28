@@ -5,6 +5,7 @@ mod tests {
     #[test]
     fn should_return_correct_subgrid_index() {
         let mut grid = Grid::new();
+        println!("{}", grid.get_sub_grids(3).len());
         sudoku_solver(&mut grid, 0, 0);
 
         grid.draw();
@@ -13,6 +14,7 @@ mod tests {
 
 fn sudoku_solver(grid: &mut Grid, i: u8, j: u8) -> bool {
     if i == grid.length - 1 && j == grid.length {
+        println!("true");
         return true;
     }
 
@@ -24,7 +26,7 @@ fn sudoku_solver(grid: &mut Grid, i: u8, j: u8) -> bool {
         return sudoku_solver(grid, i, j + 1);
     }
 
-    for num in 1..9 {
+    for num in 1..10 {
         if can_put_here(grid, i, j, num) {
             put(grid, i, j, num);
             return sudoku_solver(grid, i, j + 1);
@@ -33,6 +35,7 @@ fn sudoku_solver(grid: &mut Grid, i: u8, j: u8) -> bool {
         put(grid, i, j, 0);
     }
 
+    println!("false {} {}", i, j);
     return false;
 }
 
