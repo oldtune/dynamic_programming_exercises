@@ -27,7 +27,7 @@ fn sudoku_solver(grid: &mut Grid, i: u8, j: u8) -> bool {
     for num in 1..9 {
         if can_put_here(grid, i, j, num) {
             put(grid, i, j, num);
-            return sudoku_solver(grid, i, j);
+            return sudoku_solver(grid, i, j + 1);
         }
 
         put(grid, i, j, 0);
@@ -66,7 +66,8 @@ fn check_horizontal(grid: &Grid, i: u8, n: u8) -> bool {
 }
 
 fn can_put_in_subgrid(grid: &Grid, grid_index: u8, n: u8) -> bool {
-    let sub_grid = &grid.sub_grids[grid_index as usize];
+    let sub_grids = grid.get_sub_grids(3);
+    let sub_grid = &sub_grids[grid_index as usize];
 
     for i in sub_grid.board {
         let sub_array = i;
@@ -84,13 +85,12 @@ pub struct SubGrid<'a> {
     pub board: [&'a [u8]; 3],
 }
 
-pub struct Grid<'a> {
+pub struct Grid {
     pub board: [[u8; 9]; 9],
-    pub sub_grids: Vec<SubGrid<'a>>,
     pub length: u8,
 }
 
-impl<'a> Grid<'a> {
+impl Grid {
     pub fn get_current_subgrid_index(i: u8, j: u8) -> u8 {
         (i / 3) + (j / 3)
     }
@@ -101,48 +101,34 @@ impl<'a> Grid<'a> {
         }
     }
 
-    pub fn pre_fill_board(&self) {}
-
     fn new() -> Self {
         let board: [[u8; 9]; 9] = [[0; 9]; 9];
 
-        let result = Self {
+        let mut result = Self {
             board: board,
-            sub_grids: vec![],
             length: 9,
         };
-
-        result.make_sub_grids(0, 0, 9, 3, vec![]);
         result
     }
 
-    fn make_sub_grids(
-        &'a self,
-        i: u8,
-        j: u8,
-        n: u8,
-        step: u8,
-        mut result: Vec<SubGrid<'a>>,
-    ) -> Vec<SubGrid<'a>> {
-        if i == n && j == n {
-            return result;
-        }
-
-        if j == n {
-            return Grid::make_sub_grids(&self, i + step, 0, n, step, result);
-        } else {
-            let j_usize = j as usize;
+    fn get_sub_grids<'a>(&'a self, step: u8) -> Vec<SubGrid<'a>> {
+        let mut result = vec![];
+        let step_usize = step as usize;
+        for i in (0..self.length).step_by(step_usize) {
             let i_usize = i as usize;
-            let sub_grid = SubGrid {
-                board: [
-                    &self.board[i_usize][j_usize..j_usize + 3],
-                    &self.board[i_usize + 1][j_usize..j_usize + 3],
-                    &self.board[i_usize + 2][j_usize..j_usize + 3],
-                ],
-            };
+            for j in (0..self.length).step_by(step_usize) {
+                let j_usize = j as usize;
+                let sub_grid = SubGrid {
+                    board: [
+                        &self.board[i_usize][j_usize..(j_usize + step_usize - 1)],
+                        &self.board[i_usize + 1][j_usize..(j_usize + step_usize - 1)],
+                        &self.board[i_usize + 2][j_usize..(j_usize + step_usize - 1)],
+                    ],
+                };
 
-            result.push(sub_grid);
-            return Grid::make_sub_grids(&self, i, j + step, step, step, result);
+                result.push(sub_grid);
+            }
         }
+        result
     }
 }
